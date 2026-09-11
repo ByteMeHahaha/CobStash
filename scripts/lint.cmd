@@ -1,4 +1,4 @@
-cobc -I ../src ^
+cobc -I ../src/copy ^
   -fsyntax-only ^
   -free ^
   ../src/*.cob ^

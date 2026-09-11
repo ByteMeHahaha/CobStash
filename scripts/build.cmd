@@ -1,4 +1,4 @@
-cobc -I ../src ^
+cobc -I ../src/copy ^
   -free ^
   -x ../src/main.cob ^
   -o ../bin/CobStash ^
