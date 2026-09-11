@@ -24,7 +24,8 @@ jobs:
         run: |
           cobc -fsyntax-only \
             -I ./src/copy \
-            -free \  ./src/*.cob \
+            -free \
+            ./src/*.cob \
             -Wall \
             -Wextra \
             -Wno-terminator \
