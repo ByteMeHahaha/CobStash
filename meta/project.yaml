@@ -1,18 +1,21 @@
-# TODO -> Add info
 project-meta:
-  project-name: Template
-  date-started:
-  last-updated:
+  project-name: CobStash
+  date-started: 2026-09-11
+  last-updated: 2026-09-11
   languages:
-    - COBOL
+    - COBOL (GnuCOBOL)
   status: Experimental
   license: MIT
   version: 0.0.1
 build:
   dev-environments:
-    - Windows 11
+    - Ubuntu (WSL2)
+  test-environments:
+    - Ubuntu (WSL2 and Docker)
   target-platforms:
-    - Windows 11
+    - Any system with Docker
+    - Windows 11 (GitHub Release)
+    - Linux (GitHub Release)
   compiler:
     compiler-name: cobc
     compiler-version: 3.2.0
@@ -22,3 +25,4 @@ team:
     - name: Ethan Kletschke
       role: Author and Owner
       github-username: ByteMeHahaha
+      website: https://ethankportfolio.netlify.app/

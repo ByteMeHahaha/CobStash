@@ -1,9 +1,8 @@
 IDENTIFICATION DIVISION.
-PROGRAM-ID. AppName.
+PROGRAM-ID. CobStash.
 
 PROCEDURE DIVISION.
-    *> TODO => Replace logic
-    DISPLAY "This is just a template.".
-    STOP RUN WITH ERROR 1.
+    DISPLAY ''.
+    STOP RUN.
 
-END PROGRAM AppName.
+END PROGRAM CobStash.

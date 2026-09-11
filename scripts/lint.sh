@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 cobc -I ../src \
+  -fsyntax-only \
   -free \
-  -x ../src/main.cob \
-	-o ../bin/BinaryName \
-  -w -q
+  ../src/*.cob \
+  -Wall \
+  -Wextra \
+  -Wno-terminator

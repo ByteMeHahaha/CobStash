@@ -1,5 +1,5 @@
 cobc -I ../src ^
   -free ^
   -x ../src/main.cob ^
-  -o ../bin/BinaryName ^
+  -o ../bin/CobStash ^
   -w -q

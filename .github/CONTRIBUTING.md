@@ -1,8 +1,8 @@
-# Contributing (WIP)
+# Contributing to CobStash (WIP)
 
 ---
 
-- [Contributing (WIP)](#contributing-wip)
+- [Contributing to CobStash (WIP)](#contributing-to-cobstash-wip)
   - [How to Contribute](#how-to-contribute)
 
 ---

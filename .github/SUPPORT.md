@@ -1,8 +1,8 @@
-# Support (WIP)
+# CobStash Support (WIP)
 
 ---
 
-- [Support (WIP)](#support-wip)
+- [CobStash Support (WIP)](#cobstash-support-wip)
   - [Compatibility](#compatibility)
     - [Notes on Mainframe Interoperability](#notes-on-mainframe-interoperability)
 
