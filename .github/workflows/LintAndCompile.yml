@@ -1,0 +1,50 @@
+name: Lint and Compile
+
+on:
+  workflow_dispatch:
+    # Runs manually via GitHub Actions UI
+  push:
+    branches: main
+
+  pull_request:
+    branches: main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull Repository
+        uses: actions/checkout@v7
+
+      - name: Install GnuCOBOL
+        uses: fabasoad/setup-cobol-action@v1.6.2
+
+      - name: Lint Code
+        run: |
+          cobc -fsyntax-only \
+            -I ./src/copy \
+            -free \  ./src/*.cob \
+            -Wall \
+            -Wextra \
+            -Wno-terminator \
+            -Wfatal-errors
+
+  build:
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Pull Repository
+        uses: actions/checkout@v7
+
+      - name: Install GnuCOBOL
+        uses: fabasoad/setup-cobol-action@v1.6.2
+
+      - name: Compile Code
+        run: |
+          cobc -I ./src/copy \
+            -free \
+            -x ./src/main.cob \
+            -o ./bin/CobStash \
+            -w -q
