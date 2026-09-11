@@ -1,0 +1,8 @@
+.github/
+.git/
+
+meta/
+bin/
+scripts/
+
+README.md
