@@ -1,0 +1,32 @@
+name: Feature Request
+description: Request a new feature for the app
+title: "[FR]: Name of Feature"
+labels:
+  - Feature Request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please be as descriptive as possible!
+
+  - type: input
+    id: feat-name
+    attributes:
+      label: Feature Name
+      description: Name of the feature you want me to implement
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary of Feature
+      description: Summarise exactly what you want the new feature to do
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Prototype (Optional)
+      description: Possible code I can use for the feature

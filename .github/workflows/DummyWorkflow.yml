@@ -1,0 +1,11 @@
+name: Dummy Workflow
+
+on: workflow_dispatch
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say "Hello"!
+        run: echo "Hello! This is a dummy workflow! Change me when you actually make the project!"

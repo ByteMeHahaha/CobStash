@@ -1,0 +1,24 @@
+# TODO -> Add info
+project-meta:
+  project-name: Template
+  date-started:
+  last-updated:
+  languages:
+    - COBOL
+  status: Experimental
+  license: MIT
+  version: 0.0.1
+build:
+  dev-environments:
+    - Windows 11
+  target-platforms:
+    - Windows 11
+  compiler:
+    compiler-name: cobc
+    compiler-version: 3.2.0
+team:
+  author: Ethan Kletschke
+  contributors:
+    - name: Ethan Kletschke
+      role: Author and Owner
+      github-username: ByteMeHahaha
