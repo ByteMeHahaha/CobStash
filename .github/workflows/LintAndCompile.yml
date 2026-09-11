@@ -47,5 +47,5 @@ jobs:
           cobc -I ./src/copy \
             -free \
             -x ./src/main.cob \
-            -o ./bin/CobStash \
+            -o ./CobStash \
             -w -q
