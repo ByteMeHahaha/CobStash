@@ -24,11 +24,11 @@ DATA DIVISION.
     01 WS-Export-Status PIC XX.
 
     *> Command line argument(s).
-    01 WS-Command PIC X(200).
+    01 WS-CLI-Args PIC X(200).
 
 PROCEDURE DIVISION.
-  ACCEPT WS-Command FROM COMMAND-LINE.
-  DISPLAY WS-Command.
+  ACCEPT WS-CLI-Args FROM COMMAND-LINE.
+  DISPLAY WS-CLI-Args.
 
   *> TODO => Process stdin input with STRING verb
 
