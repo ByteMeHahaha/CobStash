@@ -19,10 +19,19 @@ DATA DIVISION.
       05 FL-Stash-Desc PIC X(100) VALUE SPACES.
 
   WORKING-STORAGE SECTION.
+    *> File Status Codes
     01 WS-Stash-Status PIC XX.
     01 WS-Export-Status PIC XX.
 
+    *> Command line argument(s).
+    01 WS-Command PIC X(200).
+
 PROCEDURE DIVISION.
+  ACCEPT WS-Command FROM COMMAND-LINE.
+  DISPLAY WS-Command.
+
+  *> TODO => Process stdin input with STRING verb
+
   STOP RUN RETURNING 0.
 
 END PROGRAM CobStash.
