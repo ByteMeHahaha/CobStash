@@ -1,0 +1,33 @@
+project-meta:
+  project-name: CobStash
+  date-started: 2026-09-16
+  last-updated: 2026-09-16
+  languages:
+    - COBOL (GnuCOBOL)
+    - TypeScript
+    - React (TSX)
+    - Bash (Backend build and lint scripts)
+  status: Experimental
+  package-manager: npm
+  license: MIT
+  version: 0.0.1
+
+build:
+  dev-environments:
+    - Ubuntu (WSL)
+  test-environments:
+    - Ubuntu (WSL)
+  target-platforms:
+    - Any platform with Docker
+    - Linux
+  compiler:
+    compiler-name: cobc
+    compiler-version: 3.1.2
+
+team:
+  author: Ethan Kletschke
+  contributors:
+    - name: Ethan Kletschke
+      role: Author and Owner
+      github-username: ByteMeHahaha
+      website: https://ethankportfolio.netlify.app

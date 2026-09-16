@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cobc -free \
+	-fsyntax-only \
+	-I ./src/copy \
+	./src/*.cob \
+	-Wall -Wadditional \
+	-Wextra

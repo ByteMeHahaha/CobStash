@@ -1,0 +1,17 @@
+# Build output directory
+bin
+build
+dist
+
+# Build artifacts
+*.exe
+*.log
+*.lst
+*.o
+*.so
+*.dll
+*.zip
+
+# VS Code Folder (except extensions.json)
+vscode/*
+!vscode/extensions.json

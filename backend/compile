@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cobc -free \
+	-I ./src/copy \
+	-x ./src/main.cob \
+	./src/*.cob \
+	-o ./bin/CobStash \
+	-w -q
