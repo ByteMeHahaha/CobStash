@@ -26,6 +26,17 @@ DATA DIVISION.
     *> Command line argument(s).
     01 WS-CLI-Args PIC X(200).
 
+    *> The command from the API, such as "READ|123"
+    01 WS-API-Command.
+      05 WS-API-Action PIC X(4).
+        88 CREATE-Req VALUE "ADD".
+        88 READ-Req VALUE "READ".
+        88 UPDATE-Req VALUE "UPD".
+        88 DELETE-Req VALUE "DEL".
+
+      05 WS-API-Args OCCURS 3 TIMES.
+        10 WS-API-Arg PIC X(100).
+
 PROCEDURE DIVISION.
   ACCEPT WS-CLI-Args FROM COMMAND-LINE.
   DISPLAY WS-CLI-Args.
