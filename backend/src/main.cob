@@ -10,11 +10,6 @@ ENVIRONMENT DIVISION.
       RECORD KEY FL-Stash-Id
       FILE STATUS WS-Stash-Status.
 
-      SELECT FL-Export ASSIGN TO './data/Export.txt'
-      ORGANISATION LINE SEQUENTIAL
-      ACCESS MODE SEQUENTIAL
-      FILE STATUS WS-Export-Status.
-
 DATA DIVISION.
   FILE SECTION.
     FD FL-Stash.
@@ -22,10 +17,6 @@ DATA DIVISION.
       05 FL-Stash-Id PIC 9(6) VALUE ZEROS.
       05 FL-Stash-Title PIC X(20) VALUE SPACES.
       05 FL-Stash-Desc PIC X(100) VALUE SPACES.
-
-    FD FL-Export.
-    01 FL-Export-Record.
-      05 FL-Export-Line PIC X(250).
 
   WORKING-STORAGE SECTION.
     01 WS-Stash-Status PIC XX.
