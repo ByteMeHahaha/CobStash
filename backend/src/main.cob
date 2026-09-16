@@ -23,6 +23,10 @@ DATA DIVISION.
       05 FL-Stash-Title PIC X(20) VALUE SPACES.
       05 FL-Stash-Desc PIC X(100) VALUE SPACES.
 
+    FD FL-Export.
+    01 FL-Export-Record.
+      05 FL-Export-Line PIC X(250).
+
   WORKING-STORAGE SECTION.
     01 WS-Stash-Status PIC XX.
     01 WS-Export-Status PIC XX.
