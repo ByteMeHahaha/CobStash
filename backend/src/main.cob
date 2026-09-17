@@ -54,6 +54,9 @@ PROCEDURE DIVISION.
         STOP RUN RETURNING 1
     END-UNSTRING.
 
+    *> Initialise the stash file
+    PERFORM Initialise-Stash.
+
     EVALUATE TRUE
       WHEN CREATE-Req
         PERFORM API-Create
@@ -72,6 +75,33 @@ PROCEDURE DIVISION.
     END-EVALUATE.
 
     STOP RUN RETURNING 0.
+
+  Initialise-Stash.
+    *> Try open the file for reading and writing
+    OPEN I-O FL-Stash.
+
+    *> If the file doesn't exist
+    IF WS-Stash-Status = '35' THEN
+      *> Close the file's reference
+      CLOSE FL-Stash
+
+      *> Open the file for writing (creates it if it doesn't exist)
+      OPEN OUTPUT FL-Stash
+
+      IF WS-Stash-Status NOT = '00' THEN
+        DISPLAY 'ERROR|Stash could not be created'
+        STOP RUN RETURNING 1
+      END-IF
+
+      CLOSE FL-Stash
+    ELSE
+      IF WS-Stash-Status NOT = '00' THEN
+        DISPLAY 'ERROR|Stash could not be opened'
+        STOP RUN RETURNING 1
+      END-IF
+
+      CLOSE FL-Stash
+    END-IF.
 
   API-Create.
     DISPLAY FUNCTION TRIM(WS-API-Action) '|' WITH NO ADVANCING.
