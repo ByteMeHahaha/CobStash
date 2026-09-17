@@ -37,9 +37,27 @@ DATA DIVISION.
       05 WS-API-Args OCCURS 3 TIMES.
         10 WS-API-Arg PIC X(100).
 
+      *> The count of provided arguments
+      05 WS-API-Arg-Count PIC 9 VALUE 0.
+      05 WS-API-Expected-Args PIC 9 VALUE 0.
+
 PROCEDURE DIVISION.
+  *> Retrieve the raw API command from "stdin".
   ACCEPT WS-API-Command-Raw FROM COMMAND-LINE.
   DISPLAY WS-API-Command-Raw.
+
+  *> Parse the raw API command into its respective fields
+  UNSTRING WS-API-Command-Raw
+    DELIMITED BY "|"
+    INTO WS-API-Action *> API Action
+         WS-API-Args(1) *> Stash ID
+         WS-API-Args(2) *> Stash Title
+         WS-API-Args(3) *> Stash Description
+    ON OVERFLOW
+      DISPLAY 'ERROR|Too Many Arguments'
+  END-UNSTRING.
+
+  DISPLAY WS-API-Action.
 
   STOP RUN RETURNING 0.
 
