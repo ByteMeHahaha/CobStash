@@ -37,10 +37,6 @@ DATA DIVISION.
       05 WS-API-Args OCCURS 3 TIMES.
         10 WS-API-Arg PIC X(100).
 
-      *> The count of provided arguments
-      05 WS-API-Arg-Count PIC 9 VALUE 0.
-      05 WS-API-Expected-Args PIC 9 VALUE 0.
-
 PROCEDURE DIVISION.
   Main-Logic.
     *> Retrieve the raw API command from "stdin".
