@@ -23,10 +23,10 @@ DATA DIVISION.
     01 WS-Stash-Status PIC XX.
     01 WS-Export-Status PIC XX.
 
-    *> Command line argument(s).
-    01 WS-CLI-Args PIC X(200).
+    *> Raw command received from the API, such as "READ|123"
+    01 WS-API-Command-Raw PIC X(400).
 
-    *> The command from the API, such as "READ|123"
+    *> The parsed API command
     01 WS-API-Command.
       05 WS-API-Action PIC X(4).
         88 CREATE-Req VALUE "ADD".
@@ -38,10 +38,8 @@ DATA DIVISION.
         10 WS-API-Arg PIC X(100).
 
 PROCEDURE DIVISION.
-  ACCEPT WS-CLI-Args FROM COMMAND-LINE.
-  DISPLAY WS-CLI-Args.
-
-  *> TODO => Process stdin input with STRING verb
+  ACCEPT WS-API-Command-Raw FROM COMMAND-LINE.
+  DISPLAY WS-API-Command-Raw.
 
   STOP RUN RETURNING 0.
 
