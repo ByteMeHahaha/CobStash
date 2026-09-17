@@ -56,8 +56,7 @@ PROCEDURE DIVISION.
 
     EVALUATE TRUE
       WHEN CREATE-Req
-        *> Temporary Output
-        DISPLAY 'CREATE Request'
+        PERFORM API-Create
       WHEN READ-Req
         *> Temporary Output
         DISPLAY 'READ Request'
@@ -73,5 +72,11 @@ PROCEDURE DIVISION.
     END-EVALUATE.
 
     STOP RUN RETURNING 0.
+
+  API-Create.
+    DISPLAY FUNCTION TRIM(WS-API-Action) '|' WITH NO ADVANCING.
+    DISPLAY FUNCTION TRIM(WS-API-Args(1)) '|' WITH NO ADVANCING.
+    DISPLAY FUNCTION TRIM(WS-API-Args(2)) '|' WITH NO ADVANCING.
+    DISPLAY FUNCTION TRIM(WS-API-Args(3)).
 
 END PROGRAM CobStash-Backend-Worker.
