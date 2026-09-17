@@ -42,45 +42,40 @@ DATA DIVISION.
       05 WS-API-Expected-Args PIC 9 VALUE 0.
 
 PROCEDURE DIVISION.
-  *> Retrieve the raw API command from "stdin".
-  ACCEPT WS-API-Command-Raw FROM COMMAND-LINE.
+  Main-Logic.
+    *> Retrieve the raw API command from "stdin".
+    ACCEPT WS-API-Command-Raw FROM COMMAND-LINE.
 
-  *> Temporary Output
-  DISPLAY WS-API-Command-Raw.
+    *> Parse the raw API command into its respective fields
+    UNSTRING WS-API-Command-Raw
+      DELIMITED BY "|"
+      INTO WS-API-Action *> API Action
+          WS-API-Args(1) *> Stash ID
+          WS-API-Args(2) *> Stash Title
+          WS-API-Args(3) *> Stash Description
+      ON OVERFLOW
+        DISPLAY 'ERROR|Too Many Arguments'
+        STOP RUN RETURNING 1
+    END-UNSTRING.
 
-  *> Parse the raw API command into its respective fields
-  UNSTRING WS-API-Command-Raw
-    DELIMITED BY "|"
-    INTO WS-API-Action *> API Action
-         WS-API-Args(1) *> Stash ID
-         WS-API-Args(2) *> Stash Title
-         WS-API-Args(3) *> Stash Description
-    ON OVERFLOW
-      DISPLAY 'ERROR|Too Many Arguments'
-      STOP RUN RETURNING 1
-  END-UNSTRING.
+    EVALUATE TRUE
+      WHEN CREATE-Req
+        *> Temporary Output
+        DISPLAY 'CREATE Request'
+      WHEN READ-Req
+        *> Temporary Output
+        DISPLAY 'READ Request'
+      WHEN UPDATE-Req
+        *> Temporary Output
+        DISPLAY 'UPDATE Request'
+      WHEN DELETE-Req
+        *> Temporary Output
+        DISPLAY 'DELETE Request'
+      WHEN OTHER
+        DISPLAY 'ERROR|Invalid Request'
+        STOP RUN RETURNING 1
+    END-EVALUATE.
 
-  *> Temporary output
-  DISPLAY WS-API-Action.
-
-  EVALUATE TRUE
-    WHEN CREATE-Req
-      *> Temporary Output
-      DISPLAY 'CREATE Request'
-    WHEN READ-Req
-      *> Temporary Output
-      DISPLAY 'READ Request'
-    WHEN UPDATE-Req
-      *> Temporary Output
-      DISPLAY 'UPDATE Request'
-    WHEN DELETE-Req
-      *> Temporary Output
-      DISPLAY 'DELETE Request'
-    WHEN OTHER
-      DISPLAY 'ERROR|Invalid Request'
-      STOP RUN RETURNING 1
-  END-EVALUATE.
-
-  STOP RUN RETURNING 0.
+    STOP RUN RETURNING 0.
 
 END PROGRAM CobStash-Backend-Worker.
