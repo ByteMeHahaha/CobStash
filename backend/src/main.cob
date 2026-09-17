@@ -44,6 +44,8 @@ DATA DIVISION.
 PROCEDURE DIVISION.
   *> Retrieve the raw API command from "stdin".
   ACCEPT WS-API-Command-Raw FROM COMMAND-LINE.
+
+  *> Temporary Output
   DISPLAY WS-API-Command-Raw.
 
   *> Parse the raw API command into its respective fields
@@ -55,9 +57,29 @@ PROCEDURE DIVISION.
          WS-API-Args(3) *> Stash Description
     ON OVERFLOW
       DISPLAY 'ERROR|Too Many Arguments'
+      STOP RUN RETURNING 1
   END-UNSTRING.
 
+  *> Temporary output
   DISPLAY WS-API-Action.
+
+  EVALUATE TRUE
+    WHEN CREATE-Req
+      *> Temporary Output
+      DISPLAY 'CREATE Request'
+    WHEN READ-Req
+      *> Temporary Output
+      DISPLAY 'READ Request'
+    WHEN UPDATE-Req
+      *> Temporary Output
+      DISPLAY 'UPDATE Request'
+    WHEN DELETE-Req
+      *> Temporary Output
+      DISPLAY 'DELETE Request'
+    WHEN OTHER
+      DISPLAY 'ERROR|Invalid Request'
+      STOP RUN RETURNING 1
+  END-EVALUATE.
 
   STOP RUN RETURNING 0.
 
