@@ -104,9 +104,25 @@ PROCEDURE DIVISION.
     END-IF.
 
   API-Create.
-    DISPLAY FUNCTION TRIM(WS-API-Action) '|' WITH NO ADVANCING.
-    DISPLAY FUNCTION TRIM(WS-API-Args(1)) '|' WITH NO ADVANCING.
-    DISPLAY FUNCTION TRIM(WS-API-Args(2)) '|' WITH NO ADVANCING.
-    DISPLAY FUNCTION TRIM(WS-API-Args(3)).
+    OPEN I-O FL-Stash.
+
+    MOVE WS-API-Args(1) TO FL-Stash-Id.
+    MOVE WS-API-Args(2) TO FL-Stash-Title.
+    MOVE WS-API-Args(3) TO FL-Stash-Desc.
+
+    WRITE FL-Stash-Record
+      INVALID KEY
+        DISPLAY 'ERROR|Unique Key Violation'
+        CLOSE FL-Stash
+        STOP RUN RETURNING 1
+    END-WRITE.
+
+    READ FL-Stash
+      KEY IS FL-Stash-Id
+      NOT INVALID KEY
+        DISPLAY FL-Stash-Id
+    END-READ.
+
+    CLOSE FL-Stash.
 
 END PROGRAM CobStash-Backend-Worker.
