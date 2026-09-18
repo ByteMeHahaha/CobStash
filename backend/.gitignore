@@ -1,7 +1,7 @@
 # Build output directory
-bin
-build
-dist
+bin/
+build/
+dist/
 
 # Build artifacts
 *.exe
@@ -11,6 +11,9 @@ dist
 *.so
 *.dll
 *.zip
+
+# Stash file
+*.dat
 
 # VS Code Folder (except extensions.json)
 vscode/*

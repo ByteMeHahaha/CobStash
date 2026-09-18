@@ -1,7 +1,7 @@
 project-meta:
   project-name: CobStash
   date-started: 2026-09-16
-  last-updated: 2026-09-17
+  last-updated: 2026-09-18
   languages:
     - COBOL (GnuCOBOL)
     - TypeScript
@@ -10,7 +10,7 @@ project-meta:
   status: Experimental
   package-manager: npm
   license: MIT
-  version: 0.0.1
+  version: 0.0.2
 
 build:
   dev-environments:
@@ -22,7 +22,7 @@ build:
     - Linux
   compiler:
     compiler-name: cobc
-    compiler-version: 3.1.2
+    compiler-version: 3.2.0
 
 team:
   author: Ethan Kletschke

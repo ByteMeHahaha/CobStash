@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Delete the existing stash file
+rm -rf ./data/Stash.dat
+
+# Run the app with a dummy stash entry and a random ID
+./bin/CobStash "ADD|$RANDOM|Bash|The scripting language for Linux and MacOS"
