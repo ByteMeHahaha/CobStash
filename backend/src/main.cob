@@ -22,7 +22,6 @@ DATA DIVISION.
   WORKING-STORAGE SECTION.
     *> File Status Codes
     01 WS-Stash-Status PIC XX.
-    01 WS-Export-Status PIC XX.
 
     *> Raw command received from the API, such as "READ|123"
     01 WS-API-Command-Raw PIC X(400).
