@@ -42,8 +42,7 @@ DATA DIVISION.
         88 DELETE-Req VALUE "DEL".
 
       *> The individual API Arguments
-      05 WS-API-Args OCCURS 3 TIMES.
-        10 WS-API-Arg PIC X(100).
+      05 WS-API-Args PIC X(100) OCCURS 3 TIMES.
 
 PROCEDURE DIVISION.
   *> The main program logic paragraph
