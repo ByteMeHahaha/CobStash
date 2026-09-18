@@ -2,6 +2,12 @@ IDENTIFICATION DIVISION.
 PROGRAM-ID. CobStash-Backend-Worker.
 
 ENVIRONMENT DIVISION.
+  CONFIGURATION SECTION.
+    REPOSITORY.
+      *> Allows for the use of built-in functions without specifying
+      *> "FUNCTION", e.g., DISPLAY TRIM('  hi   ')
+      FUNCTION ALL INTRINSIC.
+
   INPUT-OUTPUT SECTION.
     FILE-CONTROL.
       *> Define the indexed stash file
