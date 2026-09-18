@@ -44,6 +44,15 @@ DATA DIVISION.
       *> The individual API Arguments
       05 WS-API-Args PIC X(100) OCCURS 3 TIMES.
 
+    *> The response returned to the API
+    01 WS-Response.
+      05 WS-Res-Action PIC X(4).
+        88 Response-Success VALUE 'OK'.
+        88 400-Bad-Req VALUE 'E400'.
+        88 404-Not-Found VALUE 'E404'.
+      05 FILLER PIC X VALUE '|'.
+      05 WS-Res-Data PIC X(100) OCCURS 3 TIMES.
+
 PROCEDURE DIVISION.
   *> The main program logic paragraph
   Main-Logic.
