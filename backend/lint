@@ -5,4 +5,5 @@ cobc -free \
 	-I ./src/copy \
 	./src/*.cob \
 	-Wall -Wadditional \
-	-Wextra -Wno-terminator
+	-Wextra -Wno-terminator \
+	-Wno-possible-truncate
