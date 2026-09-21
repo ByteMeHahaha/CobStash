@@ -82,7 +82,7 @@ PROCEDURE DIVISION.
         PERFORM API-Create
       WHEN READ-Req
         *> Temporary Output
-        DISPLAY 'READ Request'
+        PERFORM API-Read
       WHEN UPDATE-Req
         *> Temporary Output
         DISPLAY 'UPDATE Request'
@@ -155,6 +155,29 @@ PROCEDURE DIVISION.
       NOT INVALID KEY
         *> Display a response for the API to return to the frontend
         DISPLAY 'OK|' TRIM(FL-Stash-Id)
+    END-READ.
+
+    CLOSE FL-Stash.
+
+  API-Read.
+    OPEN INPUT FL-Stash.
+
+    MOVE WS-API-Args(1) TO FL-Stash-Id.
+
+    READ FL-Stash
+      KEY IS FL-Stash-ID
+
+      INVALID KEY
+        DISPLAY 'ERR|Invalid Key'
+        CLOSE FL-Stash
+        STOP RUN RETURNING 1
+
+      NOT INVALID KEY
+        DISPLAY 'OK|'
+          TRIM(FL-Stash-ID) '|'
+          TRIM(FL-Stash-Title) '|'
+          TRIM(FL-Stash-Desc)
+        END-DISPLAY
     END-READ.
 
     CLOSE FL-Stash.
