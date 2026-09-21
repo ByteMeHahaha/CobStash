@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Delete the existing stash file
-rm -rf ./data/Stash.dat
+# Delete and recreate the data folder
+rm -rf data && mkdir -p data
 
 # Run the app with a dummy stash entry and an ID of 1
 ./bin/CobStash "ADD|1|Bash|The scripting language for Linux and MacOS"
