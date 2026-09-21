@@ -50,6 +50,7 @@ DATA DIVISION.
         88 Response-Success VALUE 'OK'.
         88 400-Bad-Req VALUE 'E400'.
         88 404-Not-Found VALUE 'E404'.
+        88 500-Server-Err VALUE 'E500'.
       05 FILLER PIC X VALUE '|'.
       05 WS-Res-Data PIC X(100) OCCURS 3 TIMES.
 
@@ -68,7 +69,7 @@ PROCEDURE DIVISION.
           WS-API-Args(3) *> Stash Description
       ON OVERFLOW
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERROR|Too Many Arguments'
+        DISPLAY 'E400|Too Many Arguments'
         STOP RUN RETURNING 1
     END-UNSTRING.
 
@@ -90,7 +91,7 @@ PROCEDURE DIVISION.
         DISPLAY 'DELETE Request'
       WHEN OTHER
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERROR|Invalid Request'
+        DISPLAY 'E400|Invalid Request'
         STOP RUN RETURNING 1
     END-EVALUATE.
 
@@ -111,7 +112,7 @@ PROCEDURE DIVISION.
       *> If the file didn't open (or be created) successfully
       IF WS-Stash-Status NOT = '00' THEN
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERROR|Stash could not be created'
+        DISPLAY 'E500|Stash could not be created'
         STOP RUN RETURNING 1
       END-IF
 
@@ -120,7 +121,7 @@ PROCEDURE DIVISION.
       *> If the file couldn't open successfully
       IF WS-Stash-Status NOT = '00' THEN
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERROR|Stash could not be opened'
+        DISPLAY 'E500|Stash could not be opened'
         STOP RUN RETURNING 1
       END-IF
 
@@ -141,7 +142,7 @@ PROCEDURE DIVISION.
       *> If the key already exists or is otherwise invalid
       INVALID KEY
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERROR|Unique Key Violation'
+        DISPLAY 'E400|Unique Key Violation'
         CLOSE FL-Stash
         STOP RUN RETURNING 1
     END-WRITE.
