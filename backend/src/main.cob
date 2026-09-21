@@ -21,7 +21,7 @@ DATA DIVISION.
   FILE SECTION.
     FD FL-Stash.
     01 FL-Stash-Record.
-      05 FL-Stash-Id PIC 9(6) VALUE ZEROS.
+      05 FL-Stash-Id PIC ZZZZZ9 VALUE ZEROS.
       05 FL-Stash-Title PIC X(20) VALUE SPACES.
       05 FL-Stash-Desc PIC X(100) VALUE SPACES.
 
@@ -153,8 +153,8 @@ PROCEDURE DIVISION.
       KEY IS FL-Stash-Id
       *> If the key is valid
       NOT INVALID KEY
-        *> Display the written ID (Temp Output)
-        DISPLAY FL-Stash-Id
+        *> Display a response for the API to return to the frontend
+        DISPLAY 'OK|' TRIM(FL-Stash-Id)
     END-READ.
 
     CLOSE FL-Stash.
