@@ -49,7 +49,6 @@ DATA DIVISION.
       05 WS-Res-Action PIC X(4).
         88 Response-Success VALUE 'OK'.
         88 400-Bad-Req VALUE 'E400'.
-        88 404-Not-Found VALUE 'E404'.
         88 500-Server-Err VALUE 'E500'.
       05 FILLER PIC X VALUE '|'.
       05 WS-Res-Data PIC X(100) OCCURS 3 TIMES.
@@ -160,19 +159,26 @@ PROCEDURE DIVISION.
     CLOSE FL-Stash.
 
   API-Read.
+    *> Open the stash file for reading
     OPEN INPUT FL-Stash.
 
+    *> Retrieve the ID provided by the API
     MOVE WS-API-Args(1) TO FL-Stash-Id.
 
     READ FL-Stash
+      *> Read a record from the stash via random access
       KEY IS FL-Stash-ID
 
+      *> If the key is invalid (not found, invalid format, etc.)
       INVALID KEY
-        DISPLAY 'ERR|Invalid Key'
+        *> Return an error to the API
+        DISPLAY 'E400|Invalid Key'
         CLOSE FL-Stash
         STOP RUN RETURNING 1
 
+      *> If the key is valid
       NOT INVALID KEY
+        *> Return the stash's contents to the API
         DISPLAY 'OK|'
           TRIM(FL-Stash-ID) '|'
           TRIM(FL-Stash-Title) '|'
