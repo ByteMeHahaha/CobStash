@@ -74,8 +74,7 @@ PROCEDURE DIVISION.
         *> Temporary Output
         PERFORM API-Read
       WHEN UPDATE-Req
-        *> Temporary Output
-        DISPLAY 'UPDATE Request'
+        PERFORM API-Update
       WHEN DELETE-Req
         PERFORM API-Delete
       WHEN OTHER
@@ -178,7 +177,36 @@ PROCEDURE DIVISION.
 
     CLOSE FL-Stash.
 
-  *> TODO - Add API-Update
+  API-Update.
+    OPEN I-O FL-Stash.
+
+    *> Assign the provided API Arguments to the file fields
+    MOVE WS-API-Args(1) TO FL-Stash-Id.
+    MOVE WS-API-Args(2) TO FL-Stash-Title.
+    MOVE WS-API-Args(3) TO FL-Stash-Desc.
+
+    DELETE FL-Stash RECORD
+      INVALID KEY
+        DISPLAY 'ERR|Not Found' *> TODO => change error message
+        CLOSE FL-Stash
+        STOP RUN RETURNING 1
+    END-DELETE
+
+    *> Write the record to the stash file
+    WRITE FL-Stash-Record
+      INVALID KEY
+        DISPLAY 'ERR|Unique Key Violation'
+        CLOSE FL-Stash
+        STOP RUN RETURNING 1
+      NOT INVALID KEY
+        DISPLAY 'OK|'
+          TRIM(FL-Stash-ID) '|'
+          TRIM(FL-Stash-Title) '|'
+          TRIM(FL-Stash-Desc)
+        END-DISPLAY
+    END-WRITE.
+
+    CLOSE FL-Stash.
 
   API-Delete.
     OPEN I-O FL-Stash.
