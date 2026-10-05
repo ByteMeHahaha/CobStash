@@ -26,7 +26,7 @@ DATA DIVISION.
       05 FL-Stash-Desc PIC X(100) VALUE SPACES.
 
   WORKING-STORAGE SECTION.
-    *> File Status Codes
+    *> Stash File Status Code
     01 WS-Stash-Status PIC XX.
 
     *> Raw command received from the API, such as "READ|123"
@@ -59,7 +59,7 @@ PROCEDURE DIVISION.
           WS-API-Args(3) *> Stash Description
       ON OVERFLOW
         *> Display an error for the API to return to the frontend
-        DISPLAY 'E400|Too Many Arguments'
+        DISPLAY 'ERR|Too Many Arguments'
         STOP RUN RETURNING 1
     END-UNSTRING.
 
@@ -80,7 +80,7 @@ PROCEDURE DIVISION.
         PERFORM API-Delete
       WHEN OTHER
         *> Display an error for the API to return to the frontend
-        DISPLAY 'E400|Invalid Request'
+        DISPLAY 'ERR|Invalid Request'
         STOP RUN RETURNING 1
     END-EVALUATE.
 
@@ -101,7 +101,7 @@ PROCEDURE DIVISION.
       *> If the file didn't open (or be created) successfully
       IF WS-Stash-Status NOT = '00' THEN
         *> Display an error for the API to return to the frontend
-        DISPLAY 'E500|Stash could not be created'
+        DISPLAY 'ERR|Stash could not be created'
         STOP RUN RETURNING 1
       END-IF
 
@@ -110,7 +110,7 @@ PROCEDURE DIVISION.
       *> If the file couldn't open successfully
       IF WS-Stash-Status NOT = '00' THEN
         *> Display an error for the API to return to the frontend
-        DISPLAY 'E500|Stash could not be opened'
+        DISPLAY 'ERR|Stash could not be opened'
         STOP RUN RETURNING 1
       END-IF
 
@@ -131,7 +131,7 @@ PROCEDURE DIVISION.
       *> If the key already exists or is otherwise invalid
       INVALID KEY
         *> Display an error for the API to return to the frontend
-        DISPLAY 'E400|Unique Key Violation'
+        DISPLAY 'ERR|Unique Key Violation'
         CLOSE FL-Stash
         STOP RUN RETURNING 1
     END-WRITE.
@@ -162,7 +162,7 @@ PROCEDURE DIVISION.
       *> If the key is invalid (not found, invalid format, etc.)
       INVALID KEY
         *> Return an error status to the API
-        DISPLAY 'E400|Invalid Key'
+        DISPLAY 'ERR|Invalid Key'
         CLOSE FL-Stash
         STOP RUN RETURNING 1
 
@@ -187,7 +187,7 @@ PROCEDURE DIVISION.
 
     DELETE FL-Stash RECORD
       INVALID KEY
-        DISPLAY 'E400|Invalid Key'
+        DISPLAY 'ERR|Invalid Key'
         CLOSE FL-Stash
         STOP RUN RETURNING 1
       NOT INVALID KEY
