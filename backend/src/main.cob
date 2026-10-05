@@ -77,8 +77,7 @@ PROCEDURE DIVISION.
         *> Temporary Output
         DISPLAY 'UPDATE Request'
       WHEN DELETE-Req
-        *> Temporary Output
-        DISPLAY 'DELETE Request'
+        PERFORM API-Delete
       WHEN OTHER
         *> Display an error for the API to return to the frontend
         DISPLAY 'E400|Invalid Request'
@@ -93,7 +92,7 @@ PROCEDURE DIVISION.
 
     *> If the file doesn't exist
     IF WS-Stash-Status = '35' THEN
-      *> Close the file's reference
+      *> Close the file's current reference
       CLOSE FL-Stash
 
       *> Open the file for writing (creates it if it doesn't exist)
@@ -162,7 +161,7 @@ PROCEDURE DIVISION.
 
       *> If the key is invalid (not found, invalid format, etc.)
       INVALID KEY
-        *> Return an error to the API
+        *> Return an error status to the API
         DISPLAY 'E400|Invalid Key'
         CLOSE FL-Stash
         STOP RUN RETURNING 1
@@ -176,6 +175,24 @@ PROCEDURE DIVISION.
           TRIM(FL-Stash-Desc)
         END-DISPLAY
     END-READ.
+
+    CLOSE FL-Stash.
+
+  *> TODO - Add API-Update
+
+  API-Delete.
+    OPEN I-O FL-Stash.
+
+    MOVE WS-API-Args(1) TO FL-Stash-Id.
+
+    DELETE FL-Stash RECORD
+      INVALID KEY
+        DISPLAY 'E400|Invalid Key'
+        CLOSE FL-Stash
+        STOP RUN RETURNING 1
+      NOT INVALID KEY
+        DISPLAY 'OK|' TRIM(FL-Stash-ID)
+    END-DELETE.
 
     CLOSE FL-Stash.
 
