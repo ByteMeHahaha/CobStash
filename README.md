@@ -12,26 +12,13 @@ general-purpose stash of structured records.
 ---
 
 - [CobStash](#cobstash)
-  - [About CobStash](#about-cobstash)
-    - [Architecture](#architecture)
-    - [Installation](#installation)
-    - [Running the backend](#running-the-backend)
-    - [Running the API](#running-the-api)
-    - [Running the frontend](#running-the-frontend)
-    - [API endpoints](#api-endpoints)
+  - [About](#about)
 
 ---
 
-## About CobStash
 
-### Architecture
+## About
 
-### Installation
+WIP
 
-### Running the backend
-
-### Running the API
-
-### Running the frontend
-
-### API endpoints
+<!-- TODO -->
