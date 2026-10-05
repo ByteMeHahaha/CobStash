@@ -4,7 +4,7 @@ A React app with a TypeScript API and a COBOL backend for a
 general-purpose stash of structured records.
 
 - Author: Ethan Kletschke
-- Version: `0.0.2`
+- Version: `0.0.3`
 - Developed on: Ubuntu (WSL2)
 - License: MIT
 - Project metadata file: [`project.yaml`](./meta/project.yaml)
@@ -12,13 +12,9 @@ general-purpose stash of structured records.
 ---
 
 - [CobStash](#cobstash)
-  - [About](#about)
+  - [About CobStash](#about-cobstash)
 
 ---
 
 
-## About
-
-WIP
-
-<!-- TODO -->
+## About CobStash
