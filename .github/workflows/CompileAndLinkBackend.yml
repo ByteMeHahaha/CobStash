@@ -1,0 +1,27 @@
+name: Compile and Link
+
+# Controls when the workflow will run
+on: [workflow_dispatch, pull_request, push]
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up GnuCOBOL
+        uses: fabasoad/setup-cobol-action@v1.6.1
+        with:
+          version: 3.2
+
+      - run: cd backend
+
+      - name: Syntax check
+        run: cobc -I src/copy -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator src/*.cob
+
+      - name: Compile (warnings)
+        run: cobc -Wfatal-errors -Wall -Wextra -Wno-terminator -I src/copy -c src/*.cob
+
+      - name: Link executable
+        run: cobc -x -I src/copy src/*.cob
