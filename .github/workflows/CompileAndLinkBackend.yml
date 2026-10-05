@@ -15,14 +15,11 @@ jobs:
         with:
           version: 3.2
 
-      - run: cd backend && ls
-      - run: ls src
-
       - name: Syntax check
-        run: cobc -I src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator src/*.cob
+        run: cobc -I backend/src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator backend/src/*.cob
 
       - name: Compile (warnings)
-        run: cobc -Wfatal-errors -Wall -Wextra -Wno-terminator -I src/copy -c src/*.cob
+        run: cobc -Wfatal-errors -Wall -Wextra -Wno-terminator -I backend/src/ -c backend/src/*.cob
 
       - name: Link executable
-        run: cobc -x -I src/ src/*.cob
+        run: cobc -x -I backend/src/ backend/src/*.cob
