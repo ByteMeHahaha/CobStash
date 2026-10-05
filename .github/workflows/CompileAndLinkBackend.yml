@@ -16,6 +16,7 @@ jobs:
           version: 3.2
 
       - run: cd backend && ls
+      - run: ls src
 
       - name: Syntax check
         run: cobc -I src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator src/*.cob
