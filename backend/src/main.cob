@@ -1,5 +1,5 @@
 IDENTIFICATION DIVISION.
-PROGRAM-ID. CobStash-Backend-Worker.
+PROGRAM-ID. CobStash-Backend.
 
 ENVIRONMENT DIVISION.
   CONFIGURATION SECTION.
@@ -71,7 +71,6 @@ PROCEDURE DIVISION.
       WHEN CREATE-Req
         PERFORM API-Create
       WHEN READ-Req
-        *> Temporary Output
         PERFORM API-Read
       WHEN UPDATE-Req
         PERFORM API-Update
@@ -185,20 +184,22 @@ PROCEDURE DIVISION.
     MOVE WS-API-Args(2) TO FL-Stash-Title.
     MOVE WS-API-Args(3) TO FL-Stash-Desc.
 
+    *> Delete the existing stash record with the same ID.
     DELETE FL-Stash RECORD
       INVALID KEY
-        DISPLAY 'ERR|Not Found' *> TODO => change error message
+        DISPLAY 'ERR|Not Found'
         CLOSE FL-Stash
         STOP RUN RETURNING 1
     END-DELETE
 
-    *> Write the record to the stash file
+    *> Write the new record to the stash file
     WRITE FL-Stash-Record
       INVALID KEY
-        DISPLAY 'ERR|Unique Key Violation'
+        DISPLAY 'ERR|Unique Key Violation' *> Should not hit this error
         CLOSE FL-Stash
         STOP RUN RETURNING 1
       NOT INVALID KEY
+        *> Display the new record to stdout for the API to read
         DISPLAY 'OK|'
           TRIM(FL-Stash-ID) '|'
           TRIM(FL-Stash-Title) '|'
@@ -224,4 +225,4 @@ PROCEDURE DIVISION.
 
     CLOSE FL-Stash.
 
-END PROGRAM CobStash-Backend-Worker.
+END PROGRAM CobStash-Backend.
