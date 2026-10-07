@@ -16,10 +16,10 @@ jobs:
           version: 3.2
 
       - name: Syntax check
-        run: cobc -I backend/src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator backend/src/*.cob
+        run: cobc -free -I backend/src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator backend/src/*.cob
 
       - name: Compile (warnings)
-        run: cobc -Wfatal-errors -Wall -Wextra -Wno-terminator -I backend/src/ -c backend/src/*.cob
+        run: cobc -free -Wfatal-errors -Wall -Wextra -Wno-terminator -I backend/src/ -c backend/src/*.cob
 
       - name: Link executable
-        run: cobc -x -I backend/src/ backend/src/*.cob
+        run: cobc -free -x -I backend/src/ backend/src/*.cob
