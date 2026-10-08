@@ -60,7 +60,7 @@ _**NB: Full feature checklist will be added to as the API is developed.**_
 
 - [ ] Runs on port 3000
 - [x] Spawns a child process of the backend
-- [ ] Successfully reads `stdout` of the backend
+- [x] Successfully reads `stdout` of the backend
 - [ ] Processes frontend requests and formats them into
   valid requests for the backend to read
 
@@ -74,4 +74,4 @@ with the backend through the API.
 _**NB: Full feature checklist will be added to as the frontend is developed.**_
 
 - [ ] Fully styled with SCSS
-- [ ] Interacts with API
+- [ ] Makes requests to API
