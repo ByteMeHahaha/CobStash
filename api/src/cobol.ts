@@ -4,8 +4,8 @@ export async function runCobol(command: string): Promise<string> {
   return new Promise((resolve, reject) => {
     // Spawn the backend as a child process
     const cbl = spawn("../backend/bin/CobStash", [command /* CLI Args */], {
-      cwd: "../backend",
-      stdio: ["pipe", "pipe", "pipe"]
+      cwd: "../backend", // Change current working directory to the backend folder
+      stdio: ["ignore", "pipe", "pipe"] // ignore stdin and pipe stdout and stderr
     });
 
     // Declare variables for standard output and error output
