@@ -39,17 +39,17 @@ The basic idea (and main gimmick) for the backend is that it's actually a
 GnuCOBOL app that reads from an `ORGANIZATION INDEXED` file
 _(i.e., a file with records identified by a primary key of some sort)_
 as opposed to integrating with and connecting to a database like MySQL or
-PostgreSQL. The backend reads input from the API via `stdin`, performs an
-operation on the indexed file, and
+PostgreSQL. The backend reads input from the API via command-line arguments,
+performs an operation on the indexed file, and sends output to `stdout`.
 
 #### Feature Roadmap
 
-- [x] Read formatted input from `stdin`
+- [x] Read formatted input from CLI Args
 - [x] Basic indexed file handling
-  - [x] Creating new record from `stdin` input
-  - [x] Reading existing record from `stdin` input
-  - [x] Updating existing record from `stdin` input
-  - [x] Deleting existing record from `stdin` input
+  - [x] Creating new record from CLI input
+  - [x] Reading existing record from CLI input
+  - [x] Updating existing record from CLI input
+  - [x] Deleting existing record from CLI input
 - [x] Output record contents to `stdout`
 
 ### Plans for API
@@ -58,8 +58,9 @@ operation on the indexed file, and
 
 _**NB: Full feature checklist will be added to as the API is developed.**_
 
-- [x] Runs on port 3000
-- [ ] Spawns a child process of the backend
+- [ ] Runs on port 3000
+- [x] Spawns a child process of the backend
+- [ ] Successfully reads `stdout` of the backend
 - [ ] Processes frontend requests and formats them into
   valid requests for the backend to read
 
