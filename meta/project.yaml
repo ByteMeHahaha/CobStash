@@ -7,6 +7,7 @@ project-meta:
     - TypeScript
     - React (TSX)
     - Bash (Backend build and lint scripts)
+    - Markdown (Documentation)
   status: Experimental
   package-manager: npm
   license: MIT
