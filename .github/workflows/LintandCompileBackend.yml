@@ -15,7 +15,7 @@ jobs:
         with:
           version: 3.2
 
-      - name: Syntax check
+      - name: Linting
         run: cobc -free -I backend/src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator backend/src/*.cob
 
       - name: Compile (warnings)
