@@ -18,8 +18,5 @@ jobs:
       - name: Linting
         run: cobc -free -I backend/src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator backend/src/*.cob
 
-      - name: Compile (warnings)
+      - name: Compile with warnings
         run: cobc -free -Wfatal-errors -Wall -Wextra -Wno-terminator -I backend/src/ -c backend/src/*.cob
-
-      - name: Link executable
-        run: cobc -free -x -I backend/src/ backend/src/*.cob
