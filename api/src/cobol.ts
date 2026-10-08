@@ -26,6 +26,10 @@ export async function runCobol(command: string): Promise<string> {
 
     // When the app finishes running
     cbl.on("close", (exitCode) => {
+      // console.log("COBOL exit code:", exitCode);
+      // console.log("COBOL stdout:", JSON.stringify(output));
+      // console.log("COBOL stderr:", JSON.stringify(err));
+
       // If the run fails
       if (exitCode !== 0) {
         // Display error output and exit
