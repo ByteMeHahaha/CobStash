@@ -27,12 +27,13 @@ export async function runCobol(command: string): Promise<string> {
     // When the app finishes running
     cbl.on("close", (exitCode) => {
       console.log("CobStash backend exit code:", exitCode);
-      console.log("CobStash backend stdout:", JSON.stringify(output), '\n');
+      console.log("CobStash backend stdout:", JSON.stringify(output));
+      console.log("CobStash backend stderr:", JSON.stringify(err), '\n');
 
       // If the run fails
       if (exitCode !== 0) {
         // Display error output and exit
-        reject(new Error(err || `CobStash backend exited with code ${exitCode}`));
+        reject(err || `CobStash backend exited with code ${exitCode}`);
         return;
       }
 
