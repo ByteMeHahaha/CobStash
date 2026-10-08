@@ -59,7 +59,7 @@ PROCEDURE DIVISION.
           WS-API-Args(3) *> Stash Description
       ON OVERFLOW
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERR|Too Many Arguments'
+        DISPLAY 'ERR|Too Many Arguments' WITH NO ADVANCING
         STOP RUN RETURNING 1
     END-UNSTRING.
 
@@ -78,7 +78,7 @@ PROCEDURE DIVISION.
         PERFORM API-Delete
       WHEN OTHER
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERR|Invalid Request'
+        DISPLAY 'ERR|Invalid Request' WITH NO ADVANCING
         STOP RUN RETURNING 1
     END-EVALUATE.
 
@@ -99,7 +99,7 @@ PROCEDURE DIVISION.
       *> If the file didn't open (or be created) successfully
       IF WS-Stash-Status NOT = '00' THEN
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERR|Stash could not be created'
+        DISPLAY 'ERR|Stash could not be created' WITH NO ADVANCING
         STOP RUN RETURNING 1
       END-IF
 
@@ -108,7 +108,7 @@ PROCEDURE DIVISION.
       *> If the file couldn't open successfully
       IF WS-Stash-Status NOT = '00' THEN
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERR|Stash could not be opened'
+        DISPLAY 'ERR|Stash could not be opened' WITH NO ADVANCING
         STOP RUN RETURNING 1
       END-IF
 
@@ -129,7 +129,7 @@ PROCEDURE DIVISION.
       *> If the key already exists or is otherwise invalid
       INVALID KEY
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERR|Unique Key Violation'
+        DISPLAY 'ERR|Unique Key Violation' WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
     END-WRITE.
@@ -141,7 +141,7 @@ PROCEDURE DIVISION.
       *> If the key is valid
       NOT INVALID KEY
         *> Display a response for the API to return to the frontend
-        DISPLAY 'OK|' TRIM(FL-Stash-Id)
+        DISPLAY 'OK|' TRIM(FL-Stash-Id) WITH NO ADVANCING
     END-READ.
 
     CLOSE FL-Stash.
@@ -160,7 +160,7 @@ PROCEDURE DIVISION.
       *> If the key is invalid (not found, invalid format, etc.)
       INVALID KEY
         *> Return an error status to the API
-        DISPLAY 'ERR|Invalid Key'
+        DISPLAY 'ERR|Invalid Key' WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
 
@@ -171,6 +171,7 @@ PROCEDURE DIVISION.
           TRIM(FL-Stash-ID) '|'
           TRIM(FL-Stash-Title) '|'
           TRIM(FL-Stash-Desc)
+          WITH NO ADVANCING
         END-DISPLAY
     END-READ.
 
@@ -187,7 +188,7 @@ PROCEDURE DIVISION.
     *> Delete the existing stash record with the same ID.
     DELETE FL-Stash RECORD
       INVALID KEY
-        DISPLAY 'ERR|Not Found'
+        DISPLAY 'ERR|Not Found' WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
     END-DELETE
@@ -195,7 +196,7 @@ PROCEDURE DIVISION.
     *> Write the new record to the stash file
     WRITE FL-Stash-Record
       INVALID KEY
-        DISPLAY 'ERR|Unique Key Violation' *> Should not hit this error
+        DISPLAY 'ERR|Unique Key Violation' WITH NO ADVANCING *> Should not hit this error
         CLOSE FL-Stash
         STOP RUN RETURNING 1
       NOT INVALID KEY
@@ -204,6 +205,7 @@ PROCEDURE DIVISION.
           TRIM(FL-Stash-ID) '|'
           TRIM(FL-Stash-Title) '|'
           TRIM(FL-Stash-Desc)
+          WITH NO ADVANCING
         END-DISPLAY
     END-WRITE.
 
@@ -216,11 +218,11 @@ PROCEDURE DIVISION.
 
     DELETE FL-Stash RECORD
       INVALID KEY
-        DISPLAY 'ERR|Invalid Key'
+        DISPLAY 'ERR|Invalid Key' WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
       NOT INVALID KEY
-        DISPLAY 'OK|' TRIM(FL-Stash-ID)
+        DISPLAY 'OK|' TRIM(FL-Stash-ID) WITH NO ADVANCING
     END-DELETE.
 
     CLOSE FL-Stash.
