@@ -4,12 +4,12 @@
 
 ### Backend
 
-No backend changes.
+<!-- BACKEND CHANGES HERE -->
 
 ### API
 
-No API changes.
+<!-- API CHANGES HERE -->
 
 ### Frontend
 
-No frontend changes.
+<!-- FRONTEND CHANGES HERE -->
