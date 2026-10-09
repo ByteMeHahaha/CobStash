@@ -1,5 +1,6 @@
 import express from "express";
 import { runCobol } from "./cobol";
+import { resToJsonString } from "./resToJsonString";
 
 const app = express();
 
@@ -13,10 +14,10 @@ app.get("/api/stash/:id", async (req, res) => {
     const result = await runCobol(`READ|${id}`);
 
     // Send the result to the frontend
-    res.status(200).send(result);
+    res.status(200).send(resToJsonString(result));
   } catch (err) {
     console.error(err);
-    res.status(500).send("CobStash backend failed\n");
+    res.status(404).send(JSON.stringify({ error: "Stash entry not found"}));
   }
 });
 
