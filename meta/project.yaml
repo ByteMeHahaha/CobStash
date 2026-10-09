@@ -3,11 +3,13 @@ project-meta:
   date-started: 2026-09-16
   last-updated: 2026-10-09
   languages:
-    - COBOL (GnuCOBOL)
-    - TypeScript
-    - React (TSX)
+    - COBOL (GnuCOBOL Backend)
+    - TypeScript (API + Frontend)
+    - JavaScript (ESLint)
+    - React (Frontend)
     - Bash (Backend build and lint scripts)
     - Markdown (Documentation)
+    - JSON (Postman API testing)
   status: Experimental
   package-manager: npm
   license: MIT
