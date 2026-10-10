@@ -55,6 +55,40 @@ app.get("/api/stash/:id", async (req, res) => {
   }
 });
 
+// PUT Request to update a stash item
+app.put("/api/stash/:id", async (req, res) => {
+  try {
+    // Extract the ID from the API route
+    const id = req.params.id;
+    // Extract the title and description from the request body
+    const { title, desc } = req.body;
+
+    // If the title is empty
+    if (String(title) === "") {
+      throw new Error("Title cannot be null");
+    }
+
+    // If the description is empty
+    if (String(desc) === "") {
+      throw new Error("Description cannot be null");
+    }
+
+    // Run the backend with the update request
+    const result = await runCobol(`UPD|${id}|${title}|${desc}`);
+
+    // Send the backend response as a JSON object
+    res.status(200).send(resToJsonString(result));
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(`Error: ${err}`);
+      res.status(400).send(JSON.stringify({ error: err }));
+    } else {
+      console.error(`Unknown error: ${err}`);
+      res.status(500).send(JSON.stringify({ error: err }));
+    }
+  }
+});
+
 // Make the API server listen on port 3000
 const server = app.listen(3000, () => {
   console.log("API server running on port 3000\n");
