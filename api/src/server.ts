@@ -9,22 +9,28 @@ app.use(express.json());
 // POST request to create a new stash item
 app.post("/api/stash", async (req, res) => {
   try {
+    // Extract the response parts from the request body
     const { id, title, desc } = req.body;
 
+    // If the ID is empty
     if (String(id).trim() === "") {
       throw new Error("ID cannot be null");
     }
 
+    // If the title is empty
     if (String(title).trim() === "") {
       throw new Error("Title cannot be null")
     }
 
+    // If the description is empty
     if (String(desc).trim() === "") {
       throw new Error("Description cannot be null")
     }
 
+    // Send a create request to the backend
     const result = await runCobol(`ADD|${id}|${title}|${desc}`);
 
+    // Send the result as a JSON object
     res.status(200).send(resToJsonString(result));
   } catch (err) {
     if (err instanceof Error) {
@@ -64,12 +70,12 @@ app.put("/api/stash/:id", async (req, res) => {
     const { title, desc } = req.body;
 
     // If the title is empty
-    if (String(title) === "") {
+    if (String(title).trim() === "") {
       throw new Error("Title cannot be null");
     }
 
     // If the description is empty
-    if (String(desc) === "") {
+    if (String(desc).trim() === "") {
       throw new Error("Description cannot be null");
     }
 
