@@ -30,6 +30,11 @@ app.post("/api/stash", async (req, res) => {
     // Send a create request to the backend
     const result = await runCobol(`ADD|${id}|${title}|${desc}`);
 
+    // If the request was not successful
+    if (!result.startsWith("OK")) {
+      throw new Error(result.split("|", 2)[1]);
+    }
+
     // Send the result as a JSON object
     res.status(200).send(resToJsonString(result));
   } catch (err) {
@@ -52,6 +57,11 @@ app.get("/api/stash/:id", async (req, res) => {
 
     // Run the backend to fetch the specified stash entry
     const result = await runCobol(`READ|${id}`);
+
+    // If the request was not successful
+    if (!result.startsWith("OK")) {
+      throw new Error(result.split("|", 2)[1]);
+    }
 
     // Send the result to the frontend
     res.status(200).send(resToJsonString(result));
@@ -81,6 +91,12 @@ app.put("/api/stash/:id", async (req, res) => {
 
     // Run the backend with the update request
     const result = await runCobol(`UPD|${id}|${title}|${desc}`);
+
+    // If the request was not successful
+    if (!result.startsWith("OK")) {
+      // Extract the backend's error message and throw it as an error
+      throw new Error(result.split("|", 2)[1]);
+    }
 
     // Send the backend response as a JSON object
     res.status(200).send(resToJsonString(result));
