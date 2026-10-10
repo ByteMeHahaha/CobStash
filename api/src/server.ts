@@ -3,7 +3,6 @@ import { runCobol } from "./cobol";
 import { resToJsonString } from "./resToJsonString";
 
 const app = express();
-
 app.use(express.json());
 
 // POST request to create a new stash item
