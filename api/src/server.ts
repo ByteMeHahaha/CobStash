@@ -105,6 +105,25 @@ app.put("/api/stash/:id", async (req, res) => {
   }
 });
 
+// DELETE request for deleting a specific stash item
+app.delete("/api/stash/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const result = await runCobol(`DEL|${id}`);
+
+    res.status(204).send(resToJsonString(result));
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(`Error: ${err.message}`);
+      res.status(404).send(JSON.stringify({ error: err.message }))
+    } else {
+      console.error(`Unknown Error: ${err}`);
+      res.status(500).send(JSON.stringify({ error: err }))
+    }
+  }
+});
+
 // Make the API server listen on port 3000
 const server = app.listen(3000, () => {
   console.log("API server running on port 3000\n");
