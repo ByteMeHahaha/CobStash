@@ -97,7 +97,7 @@ app.put("/api/stash/:id", async (req, res) => {
   } catch (err) {
     if (err instanceof Error) {
       console.error(`Error: ${err.message}`);
-      res.status(400).send(JSON.stringify({ error: err.message }));
+      res.status(404).send(JSON.stringify({ error: err.message }));
     } else {
       console.error(`Unknown error: ${err}`);
       res.status(400).send(JSON.stringify({ error: err }));
