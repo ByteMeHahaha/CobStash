@@ -24,7 +24,7 @@ general-purpose stash of structured records.
 ### API Endpoints
 
 For the API endpoints table, visit the
-[respective wiki page](github.com/ByteMeHahaha/CobStash/wiki/API-Endpoints-Table).
+[respective wiki page](https://github.com/ByteMeHahaha/CobStash/wiki/API-Endpoints-Table).
 
 ## Testing the App
 
