@@ -3,9 +3,9 @@ import { spawn } from "node:child_process";
 export async function runCobol(command: string): Promise<string> {
   return new Promise((resolve, reject) => {
     // Spawn the backend as a child process
-    const cbl = spawn("../backend/bin/CobStash", [command /* CLI Args */], {
-      cwd: "../backend",
-      stdio: ["pipe", "pipe", "pipe"]
+    const cbl = spawn("./bin/CobStash", [command /* CLI Args */], {
+      cwd: "../backend", // Change current working directory to the backend folder
+      stdio: ["ignore", "pipe", "pipe"] // ignore stdin and pipe stdout and stderr
     });
 
     // Declare variables for standard output and error output
@@ -26,9 +26,9 @@ export async function runCobol(command: string): Promise<string> {
 
     // When the app finishes running
     cbl.on("close", (exitCode) => {
-      // console.log("COBOL exit code:", exitCode);
-      // console.log("COBOL stdout:", JSON.stringify(output));
-      // console.log("COBOL stderr:", JSON.stringify(err));
+      console.log("CobStash backend exit code:", exitCode);
+      console.log("CobStash backend stdout:", JSON.stringify(output));
+      console.log("CobStash backend stderr:", JSON.stringify(err), '\n');
 
       // If the run fails
       if (exitCode !== 0) {

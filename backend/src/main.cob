@@ -129,7 +129,7 @@ PROCEDURE DIVISION.
       *> If the key already exists or is otherwise invalid
       INVALID KEY
         *> Display an error for the API to return to the frontend
-        DISPLAY 'ERR|Unique Key Violation' WITH NO ADVANCING
+        DISPLAY 'ERR|Unique Key Violation' UPON STDERR WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
     END-WRITE.
@@ -160,7 +160,7 @@ PROCEDURE DIVISION.
       *> If the key is invalid (not found, invalid format, etc.)
       INVALID KEY
         *> Return an error status to the API
-        DISPLAY 'ERR|Invalid Key' WITH NO ADVANCING
+        DISPLAY 'ERR|Invalid Key' UPON STDERR WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
 
@@ -188,7 +188,7 @@ PROCEDURE DIVISION.
     *> Delete the existing stash record with the same ID.
     DELETE FL-Stash RECORD
       INVALID KEY
-        DISPLAY 'ERR|Not Found' WITH NO ADVANCING
+        DISPLAY 'ERR|Not Found' UPON STDERR WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
     END-DELETE
@@ -196,8 +196,13 @@ PROCEDURE DIVISION.
     *> Write the new record to the stash file
     WRITE FL-Stash-Record
       INVALID KEY
-        DISPLAY 'ERR|Unique Key Violation' WITH NO ADVANCING *> Should not hit this error
+        DISPLAY 'ERR|Unique Key Violation'
+          UPON STDERR
+          WITH NO ADVANCING *> Should not hit this error
+        END-DISPLAY
+
         CLOSE FL-Stash
+
         STOP RUN RETURNING 1
       NOT INVALID KEY
         *> Display the new record to stdout for the API to read
@@ -218,7 +223,7 @@ PROCEDURE DIVISION.
 
     DELETE FL-Stash RECORD
       INVALID KEY
-        DISPLAY 'ERR|Invalid Key' WITH NO ADVANCING
+        DISPLAY 'ERR|Invalid Key' UPON STDERR WITH NO ADVANCING
         CLOSE FL-Stash
         STOP RUN RETURNING 1
       NOT INVALID KEY

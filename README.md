@@ -13,7 +13,22 @@ general-purpose stash of structured records.
 
 - [CobStash](#cobstash)
   - [About CobStash](#about-cobstash)
+    - [API Endpoints](#api-endpoints)
+  - [Testing the App](#testing-the-app)
+    - [Postman](#postman)
 
 ---
 
 ## About CobStash
+
+### API Endpoints
+
+For the API endpoints table, visit the
+[respective wiki page](github.com/ByteMeHahaha/CobStash/wiki/API-Endpoints-Table).
+
+## Testing the App
+
+### Postman
+
+The Postman collection used to test the API is included in the folder
+[`/api/postman`](/api/postman/CobStash.postman_collection.json).

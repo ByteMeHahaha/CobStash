@@ -1,4 +1,4 @@
-name: Compile and Link
+name: Compile and Lint Backend
 
 # Controls when the workflow will run
 on: [workflow_dispatch, pull_request, push]
