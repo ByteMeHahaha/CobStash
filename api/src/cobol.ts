@@ -33,7 +33,7 @@ export async function runCobol(command: string): Promise<string> {
       // If the run fails
       if (exitCode !== 0) {
         // Display error output and exit
-        reject(err || `CobStash backend exited with code ${exitCode}`);
+        reject(new Error(err || `CobStash backend exited with code ${exitCode}`));
         return;
       }
 

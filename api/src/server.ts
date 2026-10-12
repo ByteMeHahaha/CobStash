@@ -29,18 +29,13 @@ app.post("/api/stash", async (req, res) => {
     // Send a create request to the backend
     const result = await runCobol(`ADD|${id}|${title}|${desc}`);
 
-    // If the request was not successful
-    if (!result.startsWith("OK")) {
-      throw new Error(result.split("|", 2)[1]);
-    }
-
     // Send the result as a JSON object
     res.status(200).send(resToJsonString(result));
   } catch (err) {
     if (err instanceof Error) {
       console.error(`Error: ${err.message}`);
 
-      res.status(400).send(JSON.stringify({ error: `Invalid Request: ${err.message}` }))
+      res.status(400).send(JSON.stringify({ error: err.message }))
     } else {
       console.error(`Unknown Error: ${err}`);
       res.status(500).send(JSON.stringify({ error: err }))
@@ -57,16 +52,16 @@ app.get("/api/stash/:id", async (req, res) => {
     // Run the backend to fetch the specified stash entry
     const result = await runCobol(`READ|${id}`);
 
-    // If the request was not successful
-    if (!result.startsWith("OK")) {
-      throw new Error(result.split("|", 2)[1]);
-    }
-
     // Send the result to the frontend
     res.status(200).send(resToJsonString(result));
   } catch (err) {
-    console.error(`Unknown Error: ${err}`);
-    res.status(404).send(JSON.stringify({ error: "Stash entry not found"}));
+    if (err instanceof Error) {
+      console.error(`Error: ${err.message}`);
+      res.status(404).send(JSON.stringify({ error: err.message }))
+    } else {
+      console.error(`Unknown Error: ${err}`);
+      res.status(400).send(JSON.stringify({ error: String(err) }));
+    }
   }
 });
 
@@ -98,11 +93,11 @@ app.put("/api/stash/:id", async (req, res) => {
     }
 
     // Send the backend response as a JSON object
-    res.status(200).send(resToJsonString(result));
+    res.status(204).send(resToJsonString(result));
   } catch (err) {
     if (err instanceof Error) {
-      console.error(`Error: ${err}`);
-      res.status(400).send(JSON.stringify({ error: err }));
+      console.error(`Error: ${err.message}`);
+      res.status(400).send(JSON.stringify({ error: err.message }));
     } else {
       console.error(`Unknown error: ${err}`);
       res.status(500).send(JSON.stringify({ error: err }));
