@@ -1,0 +1,268 @@
+{
+  "info": {
+    "_postman_id": "9f52f11f-1fc1-4e01-892a-e539c5bd1b74",
+    "name": "CobStash",
+    "description": "# CobStash API Testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57676380"
+  },
+  "item": [
+    {
+      "name": "GET_Stash_Item_Success",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\r\n    pm.response.to.have.status(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{apiUrl}}/api/stash/1",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "api",
+            "stash",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET_Stash_Item_Failure_404",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{apiUrl}}/api/stash/99999",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "api",
+            "stash",
+            "99999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create_New_Stash_Item_Success",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const id = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;\r\npm.variables.set(\"randomId\", id);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\r\n    pm.response.to.have.status(200);    \r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"title\": \"Bash\",\r\n    \"desc\": \"The default scripting language for Unix systems\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{apiUrl}}/api/stash",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "api",
+            "stash"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create_New_Stash_Item_Failure",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update_Stash_Item_Success",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\r\n    pm.response.to.have.status(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"title\": \"C++\",\r\n    \"desc\": \"An efficient low-level programming language\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{apiUrl}}/api/stash/1",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "api",
+            "stash",
+            "1"
+          ]
+        },
+        "description": "# Update Stash Item (`PUT`)"
+      },
+      "response": []
+    },
+    {
+      "name": "Update_Stash_Item_Failure",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {\r\n    pm.response.to.have.status(404);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 99999999,\r\n    \"title\": \"Bash\",\r\n    \"desc\": \"The default scripting language for Unix systems\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{apiUrl}}/api/stash/99999999",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "api",
+            "stash",
+            "99999999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete_Stash_Item_Success",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {\r\n    pm.response.to.have.status(204);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{apiUrl}}/api/stash/1",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "api",
+            "stash",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete_Stash_Item_Failure",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", () => {\r\n    pm.response.to.have.status(404);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{apiUrl}}/api/stash/9999999999999",
+          "host": [
+            "{{apiUrl}}"
+          ],
+          "path": [
+            "api",
+            "stash",
+            "9999999999999"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
