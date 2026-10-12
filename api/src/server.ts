@@ -100,7 +100,7 @@ app.put("/api/stash/:id", async (req, res) => {
       res.status(400).send(JSON.stringify({ error: err.message }));
     } else {
       console.error(`Unknown error: ${err}`);
-      res.status(500).send(JSON.stringify({ error: err }));
+      res.status(400).send(JSON.stringify({ error: err }));
     }
   }
 });
@@ -119,7 +119,7 @@ app.delete("/api/stash/:id", async (req, res) => {
       res.status(404).send(JSON.stringify({ error: err.message }))
     } else {
       console.error(`Unknown Error: ${err}`);
-      res.status(500).send(JSON.stringify({ error: err }))
+      res.status(400).send(JSON.stringify({ error: err }))
     }
   }
 });
