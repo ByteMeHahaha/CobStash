@@ -30,7 +30,7 @@ app.post("/api/stash", async (req, res) => {
     const result = await runCobol(`ADD|${id}|${title}|${desc}`);
 
     // Send the result as a JSON object
-    res.status(200).send(resToJsonString(result));
+    res.status(201).send(resToJsonString(result));
   } catch (err) {
     if (err instanceof Error) {
       console.error(`Error: ${err.message}`);
