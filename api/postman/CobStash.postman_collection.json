@@ -84,7 +84,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", () => {\r\n    pm.response.to.have.status(200);    \r\n});"
+              "pm.test(\"Status code is 201\", () => {\r\n    pm.response.to.have.status(201);    \r\n});"
             ]
           }
         }
