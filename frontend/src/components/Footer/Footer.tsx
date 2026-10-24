@@ -1,7 +1,9 @@
+import styles from "./Footer.module.scss";
+
 export function Footer() {
   return (
-    <footer>
-      CobStash v0.0.3
+    <footer className={styles.footer}>
+      <p>CobStash v0.0.3</p>
     </footer>
   );
 }
