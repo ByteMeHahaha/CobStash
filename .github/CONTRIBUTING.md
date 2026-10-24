@@ -8,6 +8,7 @@
   - [Rules for Contributing](#rules-for-contributing)
     - [Opening an Issue](#opening-an-issue)
     - [Submitting Pull Requests](#submitting-pull-requests)
+    - [Commit Messages](#commit-messages)
 
 ---
 
@@ -45,3 +46,18 @@ The rules for submitting pull requests are as follows:
 
 Anyone who breaks these rules will be removed as a contributor from the
 repository.
+
+### Commit Messages
+
+Commit messages must follow the format shown below:
+
+```
+commit-type(area): message
+```
+
+Where:
+
+- `commit-type`: A Conventional Commit type (`feat`, `fix`, `chore`, etc.)
+- `area`: Where the change applies (must be `API`, `frontend`, or `backend`). May be omitted if
+  changing files outside these 3 areas.
+- `message`: Meaningful commit message
