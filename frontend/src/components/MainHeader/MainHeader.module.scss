@@ -1,0 +1,12 @@
+@use "../../globals" as *;
+
+.header {
+  text-align: center;
+  background-color: $lightBlue;
+  padding: 1em;
+  margin: 0;
+
+  h1 {
+    font-size: 2em;
+  }
+}

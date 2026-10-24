@@ -1,4 +1,5 @@
 import { Footer } from "../Footer/Footer";
+import { MainHeader } from "../MainHeader/MainHeader";
 
 type PageProps = {
   children: React.ReactNode;
@@ -8,9 +9,9 @@ type PageProps = {
 export function Page({ children, headerText }: PageProps) {
   return (
     <>
-      <header>
-        <h1>{headerText}</h1>
-      </header>
+      <MainHeader>
+        {headerText}
+      </MainHeader>
       <main>
         {children}
       </main>
