@@ -1,7 +1,12 @@
 name: Compile and Lint Backend
 
 # Controls when the workflow will run
-on: [workflow_dispatch, pull_request, push]
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: main
+  push:
+    branches: main
 
 jobs:
   build-app:
@@ -16,7 +21,15 @@ jobs:
           version: 3.2
 
       - name: Linting
-        run: cobc -free -I backend/src -fsyntax-only -Wfatal-errors -Wall -Wextra -Wno-terminator backend/src/*.cob
+        run: |
+          cobc -free -I backend/src \
+          -fsyntax-only -Wfatal-errors \
+          -Wall -Wextra -Wno-terminator \
+          backend/src/*.cob
 
       - name: Compile with warnings
-        run: cobc -free -Wfatal-errors -Wall -Wextra -Wno-terminator -I backend/src/ -c backend/src/*.cob
+        run: |
+          cobc -free -Wfatal-errors \
+          -Wall -Wextra -Wno-terminator \
+          -I backend/src/ \
+          -c backend/src/*.cob
