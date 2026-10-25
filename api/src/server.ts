@@ -1,8 +1,12 @@
 import express from "express";
 import { runCobol } from "./cobol";
 import { resToJsonString } from "./resToJsonString";
+import cors from "cors";
 
 const app = express();
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 app.use(express.json());
 
 // POST request to create a new stash item
