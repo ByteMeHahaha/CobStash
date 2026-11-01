@@ -11,7 +11,7 @@ export class ApiHandler {
     const res = await fetch(`http://localhost:3000/api/stash/${stashId}`);
 
     if (!res.ok) {
-      throw new Error(`API Request Failed: ${res.status}`)
+      throw new Error(`API Request Failed - ${res.status} ${res.statusText}`)
     }
 
     return res.json();

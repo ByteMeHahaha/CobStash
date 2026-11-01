@@ -8,7 +8,7 @@ export function Home() {
   useEffect(() => {
     (async function fetchEntry() {
       try {
-        const result = await ApiHandler.read(1);
+        const result = await ApiHandler.read(0);
         setEntry(result);
       } catch (error) {
         console.error("Failed to fetch stash entry:", error);
@@ -25,6 +25,7 @@ export function Home() {
           {entry.id && <p>ID: {entry.id}</p>}
           {entry.title && <p>Title: {entry.title}</p>}
           {entry.desc && <p>Description: {entry.desc}</p>}
+          {entry.error && <p>Error message: {entry.error}</p>}
         </div>
       )}
     </Page>
