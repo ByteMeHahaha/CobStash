@@ -19,7 +19,9 @@ build:
   dev-environments:
     - Ubuntu (WSL)
   test-environments:
-    - Ubuntu (WSL)
+    - Ubuntu (WSL) (Backend)
+    - Postman
+    - Mozilla Firefox (Frontend)
   target-platforms:
     - Any platform with Docker
     - Linux
