@@ -25,9 +25,11 @@ build:
   target-platforms:
     - Any platform with Docker
     - Linux
-  compiler:
-    compiler-name: cobc
-    compiler-version: 3.2.0
+  compilers:
+    - compiler-name: cobc
+      compiler-version: 3.2.0
+    - compiler-name: tsc
+      compiler-version: 6.0.3
 
 team:
   author: Ethan Kletschke
